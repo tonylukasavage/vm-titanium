@@ -93,7 +93,7 @@ Script.prototype.runInContext = function (context, callback) {
 
 		win.close();
 
-		return callback(null, res);
+		return callback && callback(null, res);
 	});
 
 	win.open();
