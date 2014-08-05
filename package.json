@@ -1,0 +1,32 @@
+{
+  "name": "vm-titanium",
+  "version": "0.0.0",
+  "description": "Implementation of node.js's vm module in Titanium",
+  "main": "vm-titanium.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tonylukasavage/vm-titanium.git"
+  },
+  "keywords": [
+    "titanium",
+    "vm",
+    "appcelerator"
+  ],
+  "author": "Tony Lukasavage",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tonylukasavage/vm-titanium/issues"
+  },
+  "homepage": "https://github.com/tonylukasavage/vm-titanium",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-titanium": "^0.1.1"
+  }
+}
