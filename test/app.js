@@ -1,2 +1,3 @@
-var vm = require('vm-titanium');
-
+var should = require('should'),
+	vm = require('vm-titanium');
+require('ti-mocha');
