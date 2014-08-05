@@ -57,7 +57,7 @@ Script.prototype.runInContext = function (context, callback) {
 	}
 
 	var self = this,
-		win = Ti.UI.createWindow({ url: 'context.js' });
+		win = Ti.UI.createWindow({ url: '__context.js' });
 
 	win.addEventListener('open', function(e) {
 		var newContext = win.__triple.context(),
@@ -104,6 +104,10 @@ Script.prototype.runInThisContext = function () {
 };
 
 Script.prototype.runInNewContext = function (context, callback) {
+	if (typeof context === 'function') {
+		callback = context;
+		context = undefined;
+	}
 	var ctx = Script.createContext(context);
 	var res = this.runInContext(ctx, callback);
 
