@@ -48,7 +48,7 @@ module.exports = function(grunt) {
 		fs.writeFileSync(path.join(resourcesDir, 'vm-titanium.js'),
 			fs.readFileSync(path.resolve('vm-titanium.js')));
 		fs.writeFileSync(path.join(resourcesDir, '__context.js'),
-			fs.readFileSync(path.resolve('context.js')));
+			fs.readFileSync(path.resolve('__context.js')));
 
 		// copy in ti-mocha and should
 		fs.writeFileSync(path.join(resourcesDir, 'ti-mocha.js'),

@@ -99,8 +99,13 @@ Script.prototype.runInContext = function (context, callback) {
 	win.open();
 };
 
-Script.prototype.runInThisContext = function () {
-	return eval(this.code); // maybe...
+Script.prototype.runInThisContext = function (callback) {
+	var res = eval(this.code);
+	if (callback) {
+		return callback(null, res);
+	} else {
+		return res;
+	}
 };
 
 Script.prototype.runInNewContext = function (context, callback) {
