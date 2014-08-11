@@ -25,10 +25,10 @@ describe('runInThisContext', function(done) {
 	});
 
 	it('can call setTimeout', function(done) {
-		var foo = 'worked';
+		var foo = 'untouched';
 		vm.runInThisContext(__('timeout.js'), function(err, result) {
 			setTimeout(function() {
-				foo.should.equal('worked');
+				foo.should.equal('untouched');
 				done();
 			}, 500);
 		});
@@ -70,17 +70,51 @@ describe('runInContext', function(done) {
 			done();
 		});
 	});
-});
 
-describe('runInNewContext', function(done) {
-
-	it('returns math', function(done) {
-		vm.runInNewContext(__('math.js'), function(err, result) {
-			should.not.exist(err);
-			should(result).equal(6);
-			done();
+	it('can call setTimeout', function(done) {
+		var context = vm.createContext({
+				foo: 'did not work'
+			}),
+			foo = 'untouched';
+		vm.runInContext(__('timeout.js'), context, function(err, result) {
+			setTimeout(function() {
+				foo.should.equal('untouched');
+				context.newone.should.equal(123);
+				context.foo.should.equal('in context');
+				done();
+			}, 500);
 		});
 	});
+
+	// it('creates Ti.UI.Window', function(done) {
+	// 	var context = vm.createContext();
+	// 	vm.runInContext(__('window.js'), context, function(err, result) {
+	// 		should.not.exist(err);
+	// 		result.should.equal('#f00');
+	// 		done();
+	// 	});
+	// });
+
+	// it('creates complex UI', function(done) {
+	// 	var context = vm.createContext();
+	// 	vm.runInContext(__('complex.js'), context, function(err, result) {
+	// 		should.not.exist(err);
+	// 		result.should.equal(11);
+	// 		done();
+	// 	});
+
+	// });
 });
+
+// describe('runInNewContext', function(done) {
+
+// 	it('returns math', function(done) {
+// 		vm.runInNewContext(__('math.js'), function(err, result) {
+// 			should.not.exist(err);
+// 			should(result).equal(6);
+// 			done();
+// 		});
+// 	});
+// });
 
 mocha.run();
