@@ -4,7 +4,15 @@
 
 node.js [vm](http://nodejs.org/api/vm.html) implementation for Titanium. This code is based heavily on James Halliday's [vm-browserify](https://github.com/substack/vm-browserify), modified only slightly for creation of contexts within the Titanium runtime.
 
-This is a work-in-progress; an idea. This is still hacky/clunky, but I'm putting it here to get more eyes on it and see if others can divine more elegant solutions to the same problem. More speciically, anyone who can resolve any of the [caveats](caveats) below gets a digital high five.
+This is a work-in-progress; an experimental idea. This is still hacky/clunky, but I'm putting it here to get more eyes on it and see if others can divine more elegant solutions to the same problem. More specifically, anyone who can resolve any of the [caveats](caveats) below gets a digital high five.
+
+## install
+
+```bash
+$ npm install vm-titanium
+$ cp ./node_modules/vm-titanium/vm-titanium.js /path/to/titanium/Resources
+$ cp ./node_modules/vm-titanium/__context.js /path/to/titanium/Resources
+```
 
 ## usage
 
@@ -26,6 +34,13 @@ vm.runInThisContext('1 + 2 + 3', function(err, result) {
 
 // ...or sync
 vm.runInNewContext('1 + 2 + 3'); // returns 6
+```
+
+## testing
+
+```bash
+# unit tests and linting
+$ grunt
 ```
 
 ## caveats
