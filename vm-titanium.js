@@ -81,6 +81,8 @@ Script.prototype.runInContext = function (context, callback) {
 			// updating existing context properties or new properties in the `win`
 			// that was only introduced after the eval.
 			if (key in context || indexOf(winKeys, key) === -1) {
+				if (key === 'Kroll') return;
+				//console.log(context[key] + ' <-- ' + newContext[key]);
 				context[key] = newContext[key];
 			}
 		});
