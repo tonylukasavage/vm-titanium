@@ -1,4 +1,4 @@
-var fs = require('fs'),
+var fs = require('fs-extra'),
 	path = require('path');
 
 var TMP_DIR = 'tmp';
@@ -38,23 +38,22 @@ module.exports = function(grunt) {
 	// load test app
 	grunt.registerTask('app-prep', 'Load source files into example alloy app', function() {
 
-		var resourcesDir = path.join(TMP_DIR, 'Resources');
+		var resourcesDir = path.join(TMP_DIR, 'Resources'),
+			to = function(file) {
+				return path.join(resourcesDir, file);
+			};
 
 		// copy in app.js
-		fs.writeFileSync(path.join(resourcesDir, 'app.js'),
-			fs.readFileSync(path.resolve('test', 'app.js')));
+		fs.copy(path.resolve('test', 'app.js'), to('app.js'));
+		fs.copy(path.resolve('test', 'fixtures'), to('fixtures'));
 
 		// copy in vm-titanium.js and context.js
-		fs.writeFileSync(path.join(resourcesDir, 'vm-titanium.js'),
-			fs.readFileSync(path.resolve('vm-titanium.js')));
-		fs.writeFileSync(path.join(resourcesDir, '__context.js'),
-			fs.readFileSync(path.resolve('__context.js')));
+		fs.copy(path.resolve('vm-titanium.js'), to('vm-titanium.js'));
+		fs.copy(path.resolve('__context.js'), to('__context.js'));
 
 		// copy in ti-mocha and should
-		fs.writeFileSync(path.join(resourcesDir, 'ti-mocha.js'),
-			fs.readFileSync(path.resolve('node_modules', 'ti-mocha', 'ti-mocha.js')));
-		fs.writeFileSync(path.join(resourcesDir, 'should.js'),
-			fs.readFileSync(path.resolve('node_modules', 'should', 'should.js')));
+		fs.copy(path.resolve('node_modules', 'ti-mocha', 'ti-mocha.js'), to('ti-mocha.js'));
+		fs.copy(path.resolve('node_modules', 'should', 'should.js'), to('should.js'));
 
 	});
 
