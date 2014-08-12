@@ -71,12 +71,12 @@ describe('runInContext', function(done) {
 		});
 	});
 
-	it('can call setTimeout', function(done) {
+	it('can change/add values in a context', function(done) {
 		var context = vm.createContext({
 				foo: 'did not work'
 			}),
 			foo = 'untouched';
-		vm.runInContext(__('timeout.js'), context, function(err, result) {
+		vm.runInContext('newone = 123; foo = "in context"', context, function(err, result) {
 			setTimeout(function() {
 				foo.should.equal('untouched');
 				context.newone.should.equal(123);
@@ -86,24 +86,27 @@ describe('runInContext', function(done) {
 		});
 	});
 
-	// it('creates Ti.UI.Window', function(done) {
-	// 	var context = vm.createContext();
-	// 	vm.runInContext(__('window.js'), context, function(err, result) {
-	// 		should.not.exist(err);
-	// 		result.should.equal('#f00');
-	// 		done();
-	// 	});
-	// });
+	it('creates Ti.UI.Window', function(done) {
+		var context = vm.createContext({ bg: '#f00' });
+		vm.runInContext('var win = Ti.UI.createWindow({ backgroundColor: bg });win.backgroundColor;', context, function(err, result) {
+			should.not.exist(err);
+			result.should.equal('#f00');
+			done();
+		});
+	});
 
-	// it('creates complex UI', function(done) {
-	// 	var context = vm.createContext();
-	// 	vm.runInContext(__('complex.js'), context, function(err, result) {
-	// 		should.not.exist(err);
-	// 		result.should.equal(11);
-	// 		done();
-	// 	});
+	it('creates complex UI', function(done) {
+		var context = vm.createContext({
+			Ti: Ti,
+			Titanium: Titanium
+		});
+		vm.runInContext(__('complex.js'), context, function(err, result) {
+			should.not.exist(err);
+			result.should.equal(11);
+			done();
+		});
 
-	// });
+	});
 });
 
 // describe('runInNewContext', function(done) {
