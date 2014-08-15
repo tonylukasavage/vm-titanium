@@ -111,16 +111,17 @@ Script.prototype.runInThisContext = function (callback) {
 Script.prototype.runInNewContext = function (context, callback) {
 	if (typeof context === 'function') {
 		callback = context;
-		context = undefined;
+		context = {};
 	}
+
 	var ctx = Script.createContext(context);
-	var res = this.runInContext(ctx, callback);
+	var res = this.runInContext(ctx, function(err, res) {
+		forEach(Object_keys(ctx), function (key) {
+			context[key] = ctx[key];
+		});
 
-	forEach(Object_keys(ctx), function (key) {
-		context[key] = ctx[key];
+		return callback(err, res);
 	});
-
-	return res;
 };
 
 forEach(Object_keys(Script.prototype), function (name) {
