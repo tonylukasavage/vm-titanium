@@ -43,6 +43,8 @@ $ grunt
 
 ## caveats
 
-* `runInContext` and `runInNewContext` require you to use a callback (as shown in the usage above). This unfortunately means that this module cannot be be a drop-in replacement for for node.js's `vm` module for use with something like browserify. This is because there is no way to communicate between contexts in Titanium with aything other than [Ti.App](http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.App) events, forcing the operations to be asynchronous. For the sake of uniformity, `runInThisContext` can also take a callback, but it is not required.
-* The only reliable, cross-platform way to create a new context in Titanium (outside of native modules) is to open a new window with [createWindow](http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI-method-createWindow) using the [url](http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.Window-property-url) parameter. This has the unfortunate effect of opening a window. While I'm not sure if the window itself can be avoided (vm-browserify does something similar with iframes), it may be possible to make it non-visual. The obvious `visible:false` though does not seem to work.
+Not sure if these are surmountable, but take a look at the issue details if you're feeling brave.
+
+* [[issue #2](https://github.com/tonylukasavage/vm-titanium/issues/2)]: `runInContext` and `runInNewContext` require you to use a callback, making them unsuitable as drop-in replacements for node.js's synchronous implementations.
+* [[issue #3](https://github.com/tonylukasavage/vm-titanium/issues/3)]: Window created when creating a new context is visible, but shouldn't be.
 
