@@ -8,8 +8,8 @@ This is a **work-in-progress**; an **experimental** idea. This is still hacky/cl
 
 ```bash
 $ npm install vm-titanium
-$ cp ./node_modules/vm-titanium/vm-titanium.js /path/to/titanium/Resources
-$ cp ./node_modules/vm-titanium/__context.js /path/to/titanium/Resources
+$ cp ./node_modules/vm-titanium/vm-titanium.js /path/to/titanium_project/Resources
+$ cp ./node_modules/vm-titanium/__context.js /path/to/titanium_project/Resources
 ```
 
 ## supported on
