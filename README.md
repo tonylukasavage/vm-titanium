@@ -25,21 +25,35 @@ So far this has only been tested on the following system, but it's likely to wor
 ```js
 var vm = require('vm-titanium');
 
+// essentially just an eval
 vm.runInNewContext('1 + 2 + 3', function(err, result) {
 	console.log(result); // prints "6"
 });
 
-vm.runInContext('1 + 2 + 3', vm.createContext(), function(err, result) {
-	console.log(result); // prints "6"
+// change/add values from context
+var context = vm.createContext({ foo: 'unchanged' });
+vm.runInContext('foo="changed";newvalue=123', context, function(err, result) {
+	console.log(context.foo);      // prints "changed"
+	console.log(context.newvalue); // prints 123
 });
 
-// runInThisContext can be async
-vm.runInThisContext('1 + 2 + 3', function(err, result) {
-	console.log(result); // prints "6"
-});
+// Create and open a Titanium Window. See issue #4 for explanation of why
+// Ti and Titanium are manually added to the sandbox.
+var sandbox = {
+	Ti: Ti,
+	Titanium: Titanium
+};
+var code =
+'var win = Ti.UI.createWindow();' +
+'win.add(Ti.UI.createView({' +
+'  height: Ti.Platform.displayCaps.platformHeight/2,' +
+'  backgroundColor: "#00f"' +
+'});'
+'win.open();'
 
-// ...or sync
-vm.runInNewContext('1 + 2 + 3'); // returns 6
+vm.runInThisContext(code, sandbox, function(err, result) {
+	// do other stuff
+});
 ```
 
 ## testing
