@@ -12,6 +12,14 @@ $ cp ./node_modules/vm-titanium/vm-titanium.js /path/to/titanium/Resources
 $ cp ./node_modules/vm-titanium/__context.js /path/to/titanium/Resources
 ```
 
+## supported on
+
+So far this has only been tested on the following system, but it's likely to work in other configurations I just haven't tried yet. Log an [issue](https://github.com/tonylukasavage/vm-titanium/issues) if you have problems using it on any of Appcelerator's supported platforms.
+
+* TiSDK 3.3.0+
+* iOS 7.1
+* iPhone simulator
+
 ## usage
 
 ```js
@@ -47,4 +55,5 @@ Not sure if these are surmountable, but take a look at the issue details if you'
 
 * [[issue #2](https://github.com/tonylukasavage/vm-titanium/issues/2)]: `runInContext` and `runInNewContext` require you to use a callback, making them unsuitable as drop-in replacements for node.js's synchronous implementations.
 * [[issue #3](https://github.com/tonylukasavage/vm-titanium/issues/3)]: Window created when creating a new context is visible, but shouldn't be.
+* [[issue #4](https://github.com/tonylukasavage/vm-titanium/issues/4)]: Certain Titanium namespaces always need to be manually copied into the context/sandbox when using `runInContext` or `runInNewContext`. **(workaround in issue)**
 
