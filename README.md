@@ -26,7 +26,7 @@ So far this has only been tested on the following system, but it's likely to wor
 var vm = require('vm-titanium');
 
 // essentially just an eval
-vm.runInNewContext('1 + 2 + 3', function(err, result) {
+vm.runInThisContext('1 + 2 + 3', function(err, result) {
 	console.log(result); // prints "6"
 });
 
@@ -51,7 +51,7 @@ var code =
 '});'
 'win.open();'
 
-vm.runInThisContext(code, sandbox, function(err, result) {
+vm.runInNewContext(code, sandbox, function(err, result) {
 	// do other stuff
 });
 ```
