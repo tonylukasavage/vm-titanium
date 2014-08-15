@@ -109,15 +109,52 @@ describe('runInContext', function(done) {
 	});
 });
 
-// describe('runInNewContext', function(done) {
+describe('runInNewContext', function(done) {
 
-// 	it('returns math', function(done) {
-// 		vm.runInNewContext(__('math.js'), function(err, result) {
-// 			should.not.exist(err);
-// 			should(result).equal(6);
-// 			done();
-// 		});
-// 	});
-// });
+	it('returns math', function(done) {
+		vm.runInNewContext(__('math.js'), function(err, result) {
+			should.not.exist(err);
+			should(result).equal(6);
+			done();
+		});
+	});
+
+	it('can change/add values in a context', function(done) {
+		var sandbox = {
+				foo: 'did not work'
+			},
+			foo = 'untouched';
+		vm.runInNewContext('newone = 123; foo = "in context"', sandbox, function(err, result) {
+			//console.log(sandbox);
+			foo.should.equal('untouched');
+			sandbox.newone.should.equal(123);
+			sandbox.foo.should.equal('in context');
+			done();
+		});
+	});
+
+	it('creates Ti.UI.Window', function(done) {
+		var sandbox = { bg: '#f00' };
+		vm.runInNewContext('var win = Ti.UI.createWindow({ backgroundColor: bg });win.backgroundColor;', sandbox, function(err, result) {
+			should.not.exist(err);
+			result.should.equal('#f00');
+			done();
+		});
+	});
+
+	it('creates complex UI', function(done) {
+		var sandbox = {
+			Ti: Ti,
+			Titanium: Titanium
+		};
+		vm.runInNewContext(__('complex.js'), sandbox, function(err, result) {
+			should.not.exist(err);
+			result.should.equal(11);
+			done();
+		});
+
+	});
+
+});
 
 mocha.run();
