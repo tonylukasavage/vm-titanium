@@ -1,8 +1,3 @@
-var fs = require('fs-extra'),
-	path = require('path');
-
-var TMP_DIR = 'tmp';
-
 module.exports = function(grunt) {
 
 	// Project configuration.
@@ -16,7 +11,7 @@ module.exports = function(grunt) {
 			}
 		},
 		clean: {
-			src: [TMP_DIR]
+			src: ['tmp']
 		}
 	});
 
