@@ -59,7 +59,6 @@ vm.runInNewContext(code, sandbox, function(err, result) {
 ## testing
 
 ```bash
-# unit tests and linting
 $ grunt
 ```
 
