@@ -52,7 +52,7 @@ var code =
 'win.open();'
 
 vm.runInNewContext(code, sandbox, function(err, result) {
-	// do other stuff
+	// do other stuff in new context
 });
 ```
 
