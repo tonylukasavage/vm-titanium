@@ -78,6 +78,6 @@ Not sure if these are surmountable, but take a look at the issue details if you'
 2. and again 
 
     <figure>
-    ![sdfsdfsdf](http://www.hercampus.com/sites/default/files/2013/02/27/topic-1350661050.jpg)
+    <img src="http://www.hercampus.com/sites/default/files/2013/02/27/topic-1350661050.jpg" alt="Caption to image">
     <figcaption>test caption goes right here</figcaption>
     </figure>
