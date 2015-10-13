@@ -72,6 +72,6 @@ Not sure if these are surmountable, but take a look at the issue details if you'
 
 
 1. testing something 
-![some image](http://www.hercampus.com/sites/default/files/2013/02/27/topic-1350661050.jpg)
+    ![some image](http://www.hercampus.com/sites/default/files/2013/02/27/topic-1350661050.jpg)
 2. and again 
-![sdfsdfsdf](http://www.hercampus.com/sites/default/files/2013/02/27/topic-1350661050.jpg)
+    ![sdfsdfsdf](http://www.hercampus.com/sites/default/files/2013/02/27/topic-1350661050.jpg)
